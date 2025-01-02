@@ -1,6 +1,6 @@
 ### Contexto e Aplicação das Promessas no Código
 
-O código no arquivo `Processing_scripts(com-promisse).pdf` utiliza promessas para gerenciar operações assíncronas, como consultas a bancos de dados e processamento de dados. As promessas são uma maneira eficiente de lidar com operações que podem levar algum tempo para serem concluídas, permitindo que o código continue a ser executado enquanto se aguarda a conclusão dessas operações.
+O código do processing-scripts utiliza promessas para gerenciar operações assíncronas, como consultas a bancos de dados e processamento de dados. As promessas são uma maneira eficiente de lidar com operações que podem levar algum tempo para serem concluídas, permitindo que o código continue a ser executado enquanto se aguarda a conclusão dessas operações.
 
 ### Criação de Dados de Requisição de Compras
 

@@ -1,4 +1,4 @@
-Claro! Aqui estão alguns trechos de código do arquivo `Processing_scripts(com-promisse).pdf` que exemplificam o uso de promessas (Promises) para gerenciar operações assíncronas:
+Aqui estão alguns trechos de código do código que exemplificam o uso de promessas (Promises) para gerenciar operações assíncronas:
 
 ### 1. Criação de Dados de Requisição de Compras
 ```javascript

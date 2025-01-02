@@ -1,10 +1,15 @@
-Aqui estão alguns trechos de código do código que exemplificam o uso de promessas (Promises) para gerenciar operações assíncronas:
+### Contexto e Aplicação das Promessas no Código
 
-### 1. Criação de Dados de Requisição de Compras
+O código no arquivo `Processing_scripts(com-promisse).pdf` utiliza promessas para gerenciar operações assíncronas, como consultas a bancos de dados e processamento de dados. As promessas são uma maneira eficiente de lidar com operações que podem levar algum tempo para serem concluídas, permitindo que o código continue a ser executado enquanto se aguarda a conclusão dessas operações.
+
+### Criação de Dados de Requisição de Compras
+
+A função `createPurchaseRequisitionData` é responsável por criar os dados das requisições de compras. Ela utiliza a função `Sys.Helpers.Promise.Create` para criar uma nova promessa. Dentro dessa promessa, uma consulta é configurada para buscar requisições de compras. A consulta é executada e os resultados são processados em um loop. Se todos os registros forem processados com sucesso, a promessa é resolvida (`resolve`). Se houver uma discrepância no número de registros processados, a promessa é rejeitada (`reject`).
+
+#### Código:
 ```javascript
 function createPurchaseRequisitionData() {
   return Sys.Helpers.Promise.Create(function (resolve, reject) {
-    // Inicialização de variáveis e configuração da consulta
     var nbOfRecords = 0;
     var transport;
     purchaseRequisitionDataArray.push(initpurchaseRequisitionDataArray());
@@ -30,10 +35,8 @@ function createPurchaseRequisitionData() {
         if (vars.GetValue_String("RequisitionNumber__", 0)) {
           rc = vars.GetValue_String("RequisitionNumber__", 0);
         }
-        // População dos dados de requisição de compras
         purchaseRequisitionData[loops].TipoDocumento = "Compras";
         purchaseRequisitionData[loops].RC = vars.GetValue_String("RequisitionNumber__", 0);
-        // ... (continuação da população dos dados)
         transport = queryM.MoveNext();
         loops++;
       }
@@ -51,7 +54,11 @@ function createPurchaseRequisitionData() {
 }
 ```
 
-### 2. Consulta de Gestão de Contratos
+### Consulta de Gestão de Contratos
+
+A função `queryGestaoDeContratos` consulta informações de gestão de contratos. Ela também utiliza `Sys.Helpers.Promise.Create` para criar uma nova promessa. O filtro da consulta é configurado com base no contrato ou `ruid`. A consulta é executada para buscar informações de contratos. Se a consulta for bem-sucedida, a promessa é resolvida com os dados do contrato. Se não encontrar o contrato ou ocorrer um erro, a promessa é resolvida com uma mensagem de erro ou rejeitada.
+
+#### Código:
 ```javascript
 function queryGestaoDeContratos(purchaseRequisitionData, tipocompra, ruid) {
   return Sys.Helpers.Promise.Create(function (resolve, reject) {
@@ -88,7 +95,11 @@ function queryGestaoDeContratos(purchaseRequisitionData, tipocompra, ruid) {
 }
 ```
 
-### 3. Consulta de Pedidos de Compra (PO)
+### Consulta de Pedidos de Compra (PO)
+
+A função `queryPO` consulta informações de pedidos de compra (PO). Ela utiliza `Sys.Helpers.Promise.Create` para criar uma nova promessa. O filtro da consulta é configurado com base no número da requisição. A consulta é executada para buscar informações de pedidos de compra. Se a consulta for bem-sucedida, a promessa é resolvida com os dados do pedido de compra. Se não encontrar o pedido ou ocorrer um erro, a promessa é rejeitada.
+
+#### Código:
 ```javascript
 function queryPO(purchaseRequisitionData) {
   return Sys.Helpers.Promise.Create(function (resolve, reject) {
@@ -118,7 +129,11 @@ function queryPO(purchaseRequisitionData) {
 }
 ```
 
-### 4. Consulta de Notas Fiscais (NF)
+### Consulta de Notas Fiscais (NF)
+
+A função `queryNF` consulta informações de notas fiscais (NF). Ela utiliza `Sys.Helpers.Promise.Create` para criar uma nova promessa. O filtro da consulta é configurado com base no número do pedido de compra (PO). A consulta é executada para buscar informações de notas fiscais. Se a consulta for bem-sucedida, a promessa é resolvida com os dados da nota fiscal. Se não encontrar a nota ou ocorrer um erro, a promessa é resolvida com uma mensagem de erro.
+
+#### Código:
 ```javascript
 function queryNF(purchaseRequisitionData) {
   return Sys.Helpers.Promise.Create(function (resolve, reject) {
@@ -146,3 +161,7 @@ function queryNF(purchaseRequisitionData) {
   });
 }
 ```
+
+### Conclusão
+
+Esses trechos de código mostram como as promessas são usadas para gerenciar operações assíncronas, como consultas a bancos de dados, e como os dados são processados e armazenados em arrays para uso posterior na geração de relatórios. As promessas ajudam a manter o código organizado e a lidar com possíveis erros de maneira estruturada.
